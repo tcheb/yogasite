@@ -29,6 +29,28 @@ public class Article
     @Column(name = "published")
     private boolean published;
 
+    @Column(name = "description")
+    private String description;
+
+    public Group getGroup()
+    {
+        return group;
+    }
+
+    public void setGroup(Group group)
+    {
+        this.group = group;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
 
     public boolean isPublished()
     {
