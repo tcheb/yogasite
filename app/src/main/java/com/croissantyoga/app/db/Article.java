@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Article
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne()
@@ -22,8 +22,8 @@ public class Article
     @Column(name = "text")
     private String text;
 
-    @Column(name = "created")
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "created", nullable = false, updatable = false, insertable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
     @Column(name = "published")
