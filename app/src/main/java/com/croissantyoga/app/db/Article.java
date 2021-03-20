@@ -32,6 +32,9 @@ public class Article
     @Column(name = "description")
     private String description;
 
+    @Column(name = "image")
+    private String image;
+
     public Group getGroup()
     {
         return group;
@@ -50,6 +53,16 @@ public class Article
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public String getImage()
+    {
+        return image;
+    }
+
+    public void setImage(String image)
+    {
+        this.image = image;
     }
 
     public boolean isPublished()
