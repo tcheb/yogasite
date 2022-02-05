@@ -35,6 +35,17 @@ public class Article
     @Column(name = "image")
     private String image;
 
+    @Column(name = "lang")
+    private String lang;
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
     public Group getGroup()
     {
         return group;
