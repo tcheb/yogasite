@@ -1,0 +1,100 @@
+<div>
+
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Sylvie Alice's yoga page</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+      <i class="fas fa-bars"></i>
+      </button>
+
+      <div
+        class="collapse navbar-collapse justify-content-end"
+        id="navbarRight"
+      >
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <!-- Locale -->
+          <li class="nav-item dropdown me-3 me-lg-0" dropdown>
+            <a dropdownToggle mdbWavesEffect
+            type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            <i class="flag-icon flag-icon-us flag-icon-squared"
+              [ngClass]="{'flag-icon' : true, 'flag-icon-squared' : true, 'flag-icon-us' : ((language | async)=='us'),
+            'flag-icon-pl' : ((language | async)=='pl'), 'flag-icon-fr' : ((language | async)=='fr')}"></i>
+            <span class="caret"></span></a>
+            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+              <a *ngIf="(language | async)!='us'" (click)="setLanguage('us')" class="dropdown-item waves-light" mdbWavesEffect>
+                <i class="flag-icon flag-icon-us flag-icon-squared"></i> English
+              </a>
+              <a *ngIf="(language | async)!='pl'" (click)="setLanguage('pl')"  class="dropdown-item waves-light" mdbWavesEffect>
+                <i class="flag-icon flag-icon-pl flag-icon-squared"></i> Polski
+              </a>
+              <a *ngIf="(language | async)!='fr'" (click)="setLanguage('fr')"  class="dropdown-item waves-light" mdbWavesEffect>
+                <i class="flag-icon flag-icon-fr flag-icon-squared"></i> Français
+              </a>
+            </div>
+          </li>
+
+          <!-- User mgmt -->
+          <li class="nav-item dropdown me-3 me-lg-0" dropdown>
+            <a dropdownToggle mdbWavesEffect
+            type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+            <i class="fas fa-user"></i><span class="caret"></span></a>
+            <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                <a class="dropdown-item waves-light" routerLink="register" mdbWavesEffect href="#">Register</a>
+                <a class="dropdown-item waves-light" routerLink="login" mdbWavesEffect href="#">Login</a>
+                <div class="divider dropdown-divider"></div>
+                <a class="dropdown-item waves-light" routerLink="userList" mdbWavesEffect href="#">User list</a>
+            </div>
+          </li>
+
+          <!-- List articles -->
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" routerLink="articles">
+              <i class="fas fa-newspaper"></i>
+            </a>
+          </li>
+
+          <!-- Add article -->
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" routerLink="add">
+              <i class="fas fa-plus"></i>
+            </a>
+          </li>
+
+          <!-- About me -->
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" routerLink="about">
+              <i class="fa fa-question"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    
+    </div>
+  </nav>
+  <!---
+  <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+    <div class="container">
+        <a class="navbar-brand" routerLink="home">Yoga of the Crescent Moon</a>
+        <ul class="nav navbar-nav" routerLinkActive="active">
+            <li class="nav-item"><a class="nav-link" routerLink="articles">Articles</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="add">Add</a></li>
+            <li class="nav-item"><a class="nav-link" routerLink="register">Register</a></li>
+        </ul>
+    </div>
+  </nav>
+  -->
+  
+  <div id="body" class="container mt-3">
+    <router-outlet></router-outlet>
+  </div>
+
+  <div id="fixedfooter"></div>
+</div>
