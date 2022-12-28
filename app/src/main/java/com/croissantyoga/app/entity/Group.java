@@ -1,7 +1,6 @@
-package com.croissantyoga.app.db;
+package com.croissantyoga.app.entity;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "Groups")

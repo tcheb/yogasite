@@ -1,4 +1,4 @@
-package com.croissantyoga.app.swagger;
+package com.croissantyoga.app.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

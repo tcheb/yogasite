@@ -13,6 +13,7 @@ import { AboutComponent } from './components/about/about.component'
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'articles', canActivate: [AuthGuard], component: ArticlesListComponent },
+  //{ path: 'articles', component: ArticlesListComponent },
   { path: 'articles/:id', component: ArticleComponent },
   { path: 'articlesDetails/:id', canActivate: [AuthGuard], component: ArticleDetailsComponent },
   { path: 'add', canActivate: [AuthGuard], component: AddArticleComponent },

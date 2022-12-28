@@ -1,8 +1,9 @@
-package com.croissantyoga.app.db;
+package com.croissantyoga.app.service;
 
 import java.util.List;
-import java.util.Optional;
 
+import com.croissantyoga.app.repository.IArticleRepository;
+import com.croissantyoga.app.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;

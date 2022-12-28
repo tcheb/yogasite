@@ -1,4 +1,6 @@
-package com.croissantyoga.app.db;
+package com.croissantyoga.app.service;
+
+import com.croissantyoga.app.entity.Article;
 
 import java.util.List;
 

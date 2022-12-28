@@ -1,4 +1,4 @@
-package com.croissantyoga.app.db;
+package com.croissantyoga.app.entity;
 
 
 import javax.persistence.*;
@@ -27,13 +27,17 @@ public class User {
     private String lastName;
 
     @Email
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     @NotNull(message="{NotNull.User.email}")
     private String email;
 
     @Column(name = "password")
     @NotNull(message="{NotNull.User.password}")
     private String password;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @ManyToOne()
     @JoinColumn(name = "group_id")

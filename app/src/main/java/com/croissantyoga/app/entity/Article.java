@@ -1,4 +1,4 @@
-package com.croissantyoga.app.db;
+package com.croissantyoga.app.entity;
 
 import java.util.Date;
 import java.util.Objects;

@@ -1,5 +1,6 @@
-package com.croissantyoga.app.db;
+package com.croissantyoga.app.repository;
 
+import com.croissantyoga.app.entity.Group;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

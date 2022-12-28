@@ -1,6 +1,7 @@
 package com.croissantyoga.app.controller;
 
-import com.croissantyoga.app.db.*;
+import com.croissantyoga.app.entity.Article;
+import com.croissantyoga.app.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,31 +18,11 @@ public class DataController
     @Autowired
     private IArticleService articleService;
 
-    @Autowired
-    private IGroupService groupService;
-
-    @Autowired
-    private IUserService userService;
-
     @GetMapping("/articles")
     public ResponseEntity<List<Article>> getAllArticles(@RequestParam(required = false) String title) {
         List<Article> articles = (List<Article>) articleService.findAll();
 
         return ResponseEntity.ok(articles);
-    }
-
-    @GetMapping("/groups")
-    public ResponseEntity<List<Group>> getAllGroups(@RequestParam(required = false) String name) {
-        List<Group> groups = (List<Group>) groupService.findAll();
-
-        return ResponseEntity.ok(groups);
-    }
-
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers(@RequestParam(required = false) String name) {
-        List<User> users = (List<User>) userService.findAll();
-
-        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/articles/{id}")

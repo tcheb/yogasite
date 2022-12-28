@@ -1,8 +1,8 @@
 package com.croissantyoga.app.auth;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.croissantyoga.app.db.User;
+//import com.auth0.jwt.JWT;
+//import com.auth0.jwt.algorithms.Algorithm;
+import com.croissantyoga.app.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +22,7 @@ import static com.croissantyoga.app.auth.AuthConstants.EXPIRATION_TIME;
 import static com.croissantyoga.app.auth.AuthConstants.SECRET;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
+/*
     private AuthenticationManager authenticationManager;
 
     public AuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -67,4 +67,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
         res.getWriter().write(body);
         res.getWriter().flush();
     }
+
+ */
 }
