@@ -22,6 +22,7 @@ public class AuthenticationController {
 
     @GetMapping("/groups")
     public ResponseEntity<List<Group>> getAllGroups(@RequestParam(required = false) String name) {
+
         List<Group> groups = (List<Group>) groupService.findAll();
 
         return ResponseEntity.ok(groups);

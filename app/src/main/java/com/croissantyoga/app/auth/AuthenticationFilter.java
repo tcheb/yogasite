@@ -1,72 +1,51 @@
 package com.croissantyoga.app.auth;
 
-//import com.auth0.jwt.JWT;
-//import com.auth0.jwt.algorithms.Algorithm;
-import com.croissantyoga.app.entity.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-
-
-import static com.croissantyoga.app.auth.AuthConstants.EXPIRATION_TIME;
-import static com.croissantyoga.app.auth.AuthConstants.SECRET;
+import java.util.HashMap;
 
 public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-/*
-    private AuthenticationManager authenticationManager;
+    private static final String BODY_ATTRIBUTE = AuthenticationFilter.class.getSimpleName() + ".body";
 
-    public AuthenticationFilter(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
+    private final ObjectMapper objectMapper;
 
-        setFilterProcessesUrl("/api/users/login");
+    public AuthenticationFilter(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
     }
 
     @Override
-    public Authentication attemptAuthentication(HttpServletRequest req,
-                                                HttpServletResponse res) throws AuthenticationException {
-        try
-        {
-            User creds = new ObjectMapper()
-                    .readValue(req.getInputStream(), User.class);
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
 
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            creds.getUsername(),
-                            creds.getPassword(),
-                            new ArrayList<>())
-            );
+        // Parse the request body as a HashMap and populate a request attribute
+        if (requiresAuthentication(request, response)) {
+            UsernamePasswordRequest usernamePasswordRequest = objectMapper.readValue(request.getInputStream(), UsernamePasswordRequest.class);
+            request.setAttribute(BODY_ATTRIBUTE, usernamePasswordRequest);
         }
-        catch (IOException e)
-        {
-            throw new RuntimeException(e);
-        }
+
+        super.doFilter(req, res, chain);
     }
 
-    @Override
-    protected void successfulAuthentication(HttpServletRequest req,
-                                            HttpServletResponse res,
-                                            FilterChain chain,
-                                            Authentication auth) throws IOException {
-        String token = JWT.create()
-                .withSubject(((User) auth.getPrincipal()).getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .sign(Algorithm.HMAC512(SECRET.getBytes()));
-
-        String body = ((User) auth.getPrincipal()).getUsername() + " " + token;
-
-        res.getWriter().write(body);
-        res.getWriter().flush();
+    protected String obtainUsername(HttpServletRequest request) {
+        UsernamePasswordRequest usernamePasswordRequest = (UsernamePasswordRequest) request.getAttribute(BODY_ATTRIBUTE);
+        return usernamePasswordRequest.get(getUsernameParameter());
     }
 
- */
+    protected String obtainPassword(HttpServletRequest request) {
+        UsernamePasswordRequest usernamePasswordRequest = (UsernamePasswordRequest) request.getAttribute(BODY_ATTRIBUTE);
+        return usernamePasswordRequest.get(getPasswordParameter());
+    }
+
+    private static class UsernamePasswordRequest extends HashMap<String, String> {
+        // Nothing, just a type marker
+    }
 }
