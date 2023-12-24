@@ -41,10 +41,10 @@ import { AboutComponent } from './components/about/about.component';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem('access_token');
+          return localStorage.getItem('accessToken');
         },
         allowedDomains: ['localhost'],
-        disallowedRoutes: ['localhost/auth/login']
+        disallowedRoutes: ['localhost/api/auth/login']
       }
     })
   ],

@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { LoginResponse } from '../models/user';
 
-const baseUrl = 'http://localhost:8080/api/auth';
+const baseUrl = 'http://localhost:8080/api/auth/login';
 
 @Injectable({
   providedIn: 'root'
@@ -44,7 +44,7 @@ export class AuthService {
 
   // Verify user credentials on server to get token
   loginForm(data: any): Observable<LoginResponse> {
-    console.error(data)
+    console.debug(data)
     return this.http
       .post<LoginResponse>(baseUrl, data, this.httpOptions)
       .pipe(
@@ -55,14 +55,14 @@ export class AuthService {
 
   // After login save token and other values(if any) in localStorage
   setUser(resp: LoginResponse) {
-    localStorage.setItem('name', resp.name);
-    localStorage.setItem('access_token', resp.access_token);
+    localStorage.setItem('email', resp.email);
+    localStorage.setItem('accessToken', "Bearer " + resp.accessToken);
     this.router.navigate(['/home']);
   }
 
   // Checking if token is set
   isLoggedIn() {
-    return localStorage.getItem('access_token') != null;
+    return localStorage.getItem('accessToken') != null;
   }
 
   // After clearing localStorage redirect to login screen

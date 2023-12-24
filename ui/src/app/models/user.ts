@@ -1,7 +1,7 @@
 export interface LoginResponse {
-    access_token: string;
+    accessToken: string;
     data: any;
-    name: string;
+    email: string;
     status: string;
     message: string;
 }

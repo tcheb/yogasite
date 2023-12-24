@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 const baseUrl = 'http://localhost:8080/api/articles';
@@ -12,7 +12,12 @@ export class ArticleService {
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<any> {
-    return this.http.get(baseUrl);
+    var httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': localStorage.getItem('accessToken')||''
+      })
+    };
+    return this.http.get(baseUrl, httpOptions);
   }
 
   get(id: any): Observable<any> {

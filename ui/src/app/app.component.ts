@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LanguageService } from './services/language.service';
+import { AuthService } from './services/auth.service'
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
   constructor (
     private route: ActivatedRoute,
     private router: Router,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private authService: AuthService
   ) {
     this.language = languageService.getLanguageObs()
   }
@@ -29,5 +31,13 @@ export class AppComponent implements OnInit {
 
   public setLanguage(language: string) {
     this.languageService.setLanguage(language);
+  }
+
+  public logout() {
+    this.authService.logout();
+  }
+
+  public isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 }

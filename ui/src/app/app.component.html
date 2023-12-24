@@ -49,20 +49,21 @@
             <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
                 <a class="dropdown-item waves-light" routerLink="register" mdbWavesEffect href="#">Register</a>
                 <a class="dropdown-item waves-light" routerLink="login" mdbWavesEffect href="#">Login</a>
+                <a *ngIf="isLoggedIn()" class="dropdown-item waves-light" (click)="logout()" mdbWavesEffect href="#">Logout</a>
                 <div class="divider dropdown-divider"></div>
                 <a class="dropdown-item waves-light" routerLink="userList" mdbWavesEffect href="#">User list</a>
             </div>
           </li>
 
           <!-- List articles -->
-          <li class="nav-item me-3 me-lg-0">
+          <li *ngIf="isLoggedIn()" class="nav-item me-3 me-lg-0">
             <a class="nav-link" routerLink="articles">
               <i class="fas fa-newspaper"></i>
             </a>
           </li>
 
           <!-- Add article -->
-          <li class="nav-item me-3 me-lg-0">
+          <li *ngIf="isLoggedIn()" class="nav-item me-3 me-lg-0">
             <a class="nav-link" routerLink="add">
               <i class="fas fa-plus"></i>
             </a>
