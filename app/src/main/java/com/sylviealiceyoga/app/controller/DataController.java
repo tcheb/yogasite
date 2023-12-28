@@ -1,10 +1,15 @@
 package com.sylviealiceyoga.app.controller;
 
+import com.sylviealiceyoga.app.auth.JwtTokenFilter;
+import com.sylviealiceyoga.app.auth.JwtTokenUtil;
 import com.sylviealiceyoga.app.entity.Article;
+import com.sylviealiceyoga.app.entity.User;
 import com.sylviealiceyoga.app.service.IArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.RequestEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.header.Header;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,9 +24,14 @@ public class DataController
     @Autowired
     private IArticleService articleService;
 
+    @Autowired
+    JwtTokenFilter jwtTokenFilter;
+
     @GetMapping("/articles")
-    public ResponseEntity<List<Article>> getAllArticles(@RequestHeader Header header, @RequestParam(required = false) String title) {
-        List<Article> articles = (List<Article>) articleService.findAll();
+    public ResponseEntity<List<Article>> getAllArticles(@RequestHeader(required=false) String authorization, @RequestParam(required = false) String title) {
+        Object tmpUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = (User) (tmpUser instanceof User?tmpUser:null);
+        List<Article> articles = articleService.findAllByUser(user);
 
         return ResponseEntity.ok(articles);
     }

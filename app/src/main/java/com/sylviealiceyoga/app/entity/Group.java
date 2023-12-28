@@ -36,6 +36,11 @@ public class Group
         this.name = name;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Group {id=%d, name=%s}", id, name);
+    }
+
     //public List<Article> getArticles()
     //{
     //    return articles;

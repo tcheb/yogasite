@@ -56,6 +56,10 @@ public class JwtTokenUtil {
     }
 
     private Claims parseClaims(String token) {
+        if (token.contains(" ")) {
+            token = token.split(" ")[1].trim();
+        }
+
         return Jwts.parser()
                 .setSigningKey(SECRET_KEY)
                 .parseClaimsJws(token)

@@ -2,6 +2,7 @@ package com.sylviealiceyoga.app.service;
 
 import java.util.List;
 
+import com.sylviealiceyoga.app.entity.User;
 import com.sylviealiceyoga.app.repository.IArticleRepository;
 import com.sylviealiceyoga.app.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,18 @@ public class ArticleService implements IArticleService
     public List<Article> findAll()
     {
         return (List<Article>) repository.findAll();
+    }
+
+    @Override
+    public List<Article> findAllByUser(User user)
+    {
+        long groupId = user==null?1:user.getGroup().getId();
+        List<Article> articles = repository.findByGroupId(groupId);
+        for (long i=1; i<groupId; i++) {
+            articles.addAll(repository.findByGroupId(i));
+        }
+
+        return articles;
     }
 
     @Nullable

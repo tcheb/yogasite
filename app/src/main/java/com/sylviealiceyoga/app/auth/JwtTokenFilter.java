@@ -1,6 +1,7 @@
 package com.sylviealiceyoga.app.auth;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.sylviealiceyoga.app.entity.User;
+import com.sylviealiceyoga.app.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +23,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 public class JwtTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtTokenUtil jwtUtil;
+
+    @Autowired
+    private IUserRepository userRepository;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -71,11 +76,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     }
 
     private UserDetails getUserDetails(String token) {
-        User userDetails = new User();
         String[] jwtSubject = jwtUtil.getSubject(token).split(",");
-
-        userDetails.setId(Long.parseLong(jwtSubject[0]));
-        userDetails.setEmail(jwtSubject[1]);
+        User userDetails = userRepository.findById(Long.parseLong(jwtSubject[0]))
+                .orElse(null);
 
         return userDetails;
     }

@@ -43,7 +43,7 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    @ManyToOne()
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id")
     private Group group;
 
@@ -119,7 +119,7 @@ public class User implements UserDetails {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", group=" + group +
+                ", group=" + (group!=null?group.toString():"null") +
                 '}';
     }
 
