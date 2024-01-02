@@ -11,7 +11,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { AboutComponent } from './components/about/about.component'
 
 const routes: Routes = [
-  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'articles', canActivate: [AuthGuard], component: ArticlesListComponent },
   //{ path: 'articles', component: ArticlesListComponent },
   { path: 'articles/:id', component: ArticleComponent },
