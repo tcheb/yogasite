@@ -5,7 +5,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { LoginResponse } from '../models/user';
 
-const baseUrl = 'http://localhost:8080/api/auth/login';
+const baseUrl = '/api/auth/login';
 
 @Injectable({
   providedIn: 'root'
